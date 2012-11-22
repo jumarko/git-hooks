@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Checks copyright in all commited files and change the year to the current year to ensure
+# up to date copyright info.
+#
+# To enable this hook, rename this file to "pre-commit".
+
+# Redirect output to stderr.
+exec 1>&2
+
+for file in $(git diff --cached --name-only) 
+do
+    sed -i '' "s/\(.*\)Copyright\(.*\)2007-2[0-9]*\(.*\)/\1Copyright\22007-`date "+%Y"`\3/" $file
+done
+
+
