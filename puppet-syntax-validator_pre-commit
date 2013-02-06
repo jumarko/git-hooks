@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Validates syntax of changed puppet files via puppet parser.
+# See https://gist.github.com/fluxrad/2361452 for more validations.
+
+for file in $(git diff --cached --name-only | grep -E '\.(pp)') 
+do
+    if [[ -f $file ]] 
+    then
+        puppet parser validate $file
+    fi
+done
+
