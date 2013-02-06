@@ -10,6 +10,10 @@ exec 1>&2
 
 for file in $(git diff --cached --name-only) 
 do
+    if [ ! -f $file ]; then
+        echo "CONTINUE"
+        continue;
+    fi
     sed -i '' "s/\(.*\)Copyright\(.*\)2007-2[0-9]*\(.*\)/\1Copyright\22007-`date "+%Y"`\3/" $file
 done
 
